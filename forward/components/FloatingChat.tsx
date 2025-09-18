@@ -121,8 +121,9 @@ export default function FloatingChat() {
       {/* 背景遮罩 - 美化效果 */}
       {isOpen && (
         <div 
-          className="fixed inset-0 transition-opacity duration-500 z-40"
-          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+          className={`fixed inset-0 bg-black transition-opacity duration-500 z-40 ${
+            isOpen ? 'bg-opacity-30' : 'bg-opacity-0'
+          }`}
           onClick={() => setIsOpen(false)}
         />
       )}
