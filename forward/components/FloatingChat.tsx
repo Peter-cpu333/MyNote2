@@ -21,7 +21,7 @@ export default function FloatingChat() {
       {/* AI聊天框 - 美化版本 */}
       <div className={`fixed bottom-0 left-0 right-0 bg-white shadow-2xl border-t z-50 transition-all duration-500 ease-out ${
         isOpen ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-      }`} style={{ height: '66.67vh' }}>
+      }`} style={{ height: '66.67vh', backgroundColor: 'rgba(255, 255, 255, 1)' }}>
         {/* 头部 - 渐变背景 */}
         <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-blue-600 to-purple-600 text-white">
           <div className="flex items-center space-x-2">
@@ -37,7 +37,7 @@ export default function FloatingChat() {
         </div>
         
         {/* 聊天内容区域 - 美化背景 */}
-        <div className="flex-1 p-4 overflow-y-auto bg-gradient-to-b from-gray-50 to-white" style={{ height: 'calc(66.67vh - 140px)' }}>
+        <div className="flex-1 p-4 overflow-y-auto" style={{ height: 'calc(66.67vh - 140px)', backgroundColor: 'rgba(249, 250, 251, 1)' }}>
           <div className="space-y-4">
             {/* AI欢迎消息 - 美化样式 */}
             <div className="flex items-start space-x-3">
@@ -79,7 +79,7 @@ export default function FloatingChat() {
         </div>
         
         {/* 输入区域 - 美化设计 */}
-        <div className="border-t p-4 bg-white">
+        <div className="border-t p-4" style={{ backgroundColor: 'rgba(255, 255, 255, 1)' }}>
           <div className="flex space-x-3">
             <input
               type="text"
@@ -121,9 +121,8 @@ export default function FloatingChat() {
       {/* 背景遮罩 - 美化效果 */}
       {isOpen && (
         <div 
-          className={`fixed inset-0 bg-black transition-opacity duration-500 z-40 ${
-            isOpen ? 'bg-opacity-30' : 'bg-opacity-0'
-          }`}
+          className="fixed inset-0 transition-opacity duration-500 z-40"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
           onClick={() => setIsOpen(false)}
         />
       )}
