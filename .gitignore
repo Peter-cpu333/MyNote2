@@ -22,7 +22,7 @@ wheels/
 MANIFEST
 
 # Virtual environments
-.env
+
 .venv
 env/
 venv/
@@ -42,7 +42,7 @@ yarn-error.log*
 out/
 
 # Environment variables
-.env.local
+
 .env.development.local
 .env.test.local
 .env.production.local
