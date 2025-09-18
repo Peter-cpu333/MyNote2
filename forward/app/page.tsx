@@ -3,8 +3,9 @@ import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import FolderCard from '../components/FolderCard';
 import NoteCard from '../components/NoteCard';
+import CreateFolderModal from '../components/CreateFolderModal';
 import { folderApi, noteApi } from '../services/api';
-import { Folder, Note } from '../types';
+import { Folder, Note, CreateFolderData } from '../types';
 
 function HomeContent() {
   const router = useRouter();
@@ -14,6 +15,8 @@ function HomeContent() {
   const [selectedFolder, setSelectedFolder] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [createLoading, setCreateLoading] = useState(false);
 
   // 获取文件夹列表
   const fetchFolders = async () => {
@@ -70,15 +73,15 @@ function HomeContent() {
 
   const handleFolderClick = (folderId: number) => {
     setSelectedFolder(folderId);
-    // 更新URL以反映当前状态
-    router.push(`/?folder_id=${folderId}`);
+    // 使用 replace 而不是 push，避免 RSC 请求冲突
+    router.replace(`/?folder_id=${folderId}`, { scroll: false });
   };
 
   const handleBackToFolders = () => {
     setSelectedFolder(null);
     setNotes([]);
-    // 返回到主页面，清除URL参数
-    router.push('/');
+    // 使用 replace 返回到主页面，清除URL参数
+    router.replace('/', { scroll: false });
   };
 
   const handleCreateNote = () => {
@@ -86,6 +89,33 @@ function HomeContent() {
       router.push(`/note/create?folder_id=${selectedFolder}`);
     } else {
       router.push('/note/create');
+    }
+  };
+
+  // 创建文件夹
+  const handleCreateFolder = async (data: CreateFolderData) => {
+    try {
+      setCreateLoading(true);
+      setError(null);
+      
+      const newFolder = await folderApi.create(data) as unknown as Folder;
+      
+      // 更新文件夹列表
+      setFolders(prev => [...prev, newFolder]);
+      
+      // 关闭弹窗
+      setIsCreateModalOpen(false);
+      
+      console.log('文件夹创建成功:', newFolder);
+    } catch (err: unknown) {
+      console.error('创建文件夹失败:', err);
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || '创建文件夹失败';
+      setError(errorMessage);
+      throw err; // 重新抛出错误，让弹窗组件处理
+    } finally {
+      setCreateLoading(false);
     }
   };
 
@@ -132,7 +162,10 @@ function HomeContent() {
           <div>
             <div className="mb-6 flex justify-between items-center">
               <h2 className="text-xl font-semibold text-gray-700">文件夹</h2>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              <button 
+                onClick={() => setIsCreateModalOpen(true)}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+              >
                 + 新建文件夹
               </button>
             </div>
@@ -140,7 +173,10 @@ function HomeContent() {
             {folders.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-gray-500 mb-4">还没有文件夹</p>
-                <button className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600">
+                <button 
+                  onClick={() => setIsCreateModalOpen(true)}
+                  className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition-colors"
+                >
                   创建第一个文件夹
                 </button>
               </div>
@@ -203,6 +239,14 @@ function HomeContent() {
           </div>
         )}
       </div>
+
+      {/* 新建文件夹弹窗 */}
+      <CreateFolderModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onSubmit={handleCreateFolder}
+        loading={createLoading}
+      />
     </main>
   );
 }
