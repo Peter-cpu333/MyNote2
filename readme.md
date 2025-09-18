@@ -40,26 +40,7 @@ git clone https://github.com/Peter-cpu333/MyNote2.git
 cd MyNote2.0
 ```
 
-### 1.2 安装依赖
-
-**后端依赖:**
-```bash
-cd backend
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-cd ..
-```
-
-**前端依赖:**
-```bash
-cd forward
-npm install
-npm run build
-cd ..
-```
-
-### 1.3 启动应用
+### 1.2 启动应用
 ```bash
 # 使用启动脚本
 ./start.sh
