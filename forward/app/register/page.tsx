@@ -37,9 +37,12 @@ export default function RegisterPage() {
       } else {
         throw new Error('登录响应格式错误');
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Registration/Login error:', err); // 添加错误日志
-      setError(err.response?.data?.detail || err.message || '注册失败，请稍后重试');
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || '注册失败，请稍后重试';
+      setError(errorMessage);
     }
   };
 

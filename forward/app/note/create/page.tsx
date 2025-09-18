@@ -1,12 +1,12 @@
 'use client';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { IoArrowBack, IoSave } from 'react-icons/io5';
 import { noteApi } from '@/services/api';
 import { CreateNoteData } from '@/types';
 
-export default function CreateNotePage() {
+function CreateNoteContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const folderId = searchParams.get('folder_id');
@@ -132,5 +132,13 @@ export default function CreateNotePage() {
         </form>
       </div>
     </main>
+  );
+}
+
+export default function CreateNotePage() {
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center min-h-screen">加载中...</div>}>
+      <CreateNoteContent />
+    </Suspense>
   );
 }

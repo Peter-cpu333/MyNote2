@@ -28,9 +28,12 @@ export default function LoginPage() {
       } else {
         throw new Error('登录响应格式错误');
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Login error:', err); // 添加错误日志
-      setError(err.response?.data?.detail || err.message || '登录失败，请检查用户名和密码');
+      const errorMessage = err instanceof Error 
+        ? err.message 
+        : (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || '登录失败，请检查用户名和密码';
+      setError(errorMessage);
     }
   };
 
