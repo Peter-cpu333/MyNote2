@@ -152,22 +152,28 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
         {/* 笔记内容区域 - 移除卡片样式 */}
         <div className="prose prose-lg prose-slate max-w-none text-gray-900
                       prose-headings:text-gray-900 prose-headings:font-semibold
-                      prose-h1:text-2xl prose-h1:mt-8 prose-h1:mb-4 prose-h1:pb-2 prose-h1:border-b prose-h1:border-gray-200
-                      prose-h2:text-xl prose-h2:mt-6 prose-h2:mb-3
-                      prose-h3:text-lg prose-h3:mt-5 prose-h3:mb-2
-                      prose-p:text-gray-900 prose-p:leading-relaxed prose-p:mb-4
-                      prose-a:text-blue-600 prose-a:no-underline hover:prose-a:text-blue-800 hover:prose-a:underline
+                      prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-6 prose-h1:pb-3 prose-h1:border-b-2 prose-h1:border-gray-300
+                      prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200
+                      prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-h3:font-medium
+                      prose-h4:text-lg prose-h4:mt-5 prose-h4:mb-2
+                      prose-h5:text-base prose-h5:mt-4 prose-h5:mb-2 prose-h5:font-medium
+                      prose-h6:text-sm prose-h6:mt-3 prose-h6:mb-2 prose-h6:font-medium prose-h6:text-gray-600
+                      prose-p:text-gray-900 prose-p:leading-relaxed prose-p:mb-4 prose-p:text-base
+                      prose-a:text-blue-600 prose-a:no-underline hover:prose-a:text-blue-800 hover:prose-a:underline prose-a:transition-colors
                       prose-strong:text-gray-900 prose-strong:font-semibold
-                      prose-em:text-gray-800
-                      prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-4 prose-blockquote:py-2 prose-blockquote:my-4 prose-blockquote:bg-blue-50 prose-blockquote:text-gray-800 prose-blockquote:italic
-                      prose-ul:list-disc prose-ul:list-inside prose-ul:space-y-1 prose-ul:mb-4 prose-ul:text-gray-900
-                      prose-ol:list-decimal prose-ol:list-inside prose-ol:space-y-1 prose-ol:mb-4 prose-ol:text-gray-900
-                      prose-li:ml-4 prose-li:text-gray-900
-                      prose-table:min-w-full prose-table:divide-y prose-table:divide-gray-200 prose-table:border prose-table:border-gray-300 prose-table:rounded-lg prose-table:my-6
+                      prose-em:text-gray-800 prose-em:italic
+                      prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-6 prose-blockquote:py-3 prose-blockquote:my-6 prose-blockquote:bg-blue-50 prose-blockquote:text-gray-800 prose-blockquote:italic prose-blockquote:rounded-r-md
+                      prose-ul:list-none prose-ul:space-y-2 prose-ul:mb-6 prose-ul:text-gray-900
+                      prose-ol:list-none prose-ol:space-y-2 prose-ol:mb-6 prose-ol:text-gray-900
+                      prose-li:relative prose-li:pl-6 prose-li:text-gray-900 prose-li:leading-relaxed
+                      prose-table:min-w-full prose-table:divide-y prose-table:divide-gray-200 prose-table:border prose-table:border-gray-300 prose-table:rounded-lg prose-table:my-8 prose-table:shadow-sm
                       prose-thead:bg-gray-50
-                      prose-th:px-6 prose-th:py-3 prose-th:text-left prose-th:text-xs prose-th:font-medium prose-th:text-gray-500 prose-th:uppercase prose-th:tracking-wider prose-th:border-b prose-th:border-gray-200
-                      prose-td:px-6 prose-td:py-4 prose-td:whitespace-nowrap prose-td:text-sm prose-td:text-gray-900 prose-td:border-b prose-td:border-gray-200
-                      prose-hr:border-gray-300 prose-hr:my-8">
+                      prose-th:px-6 prose-th:py-4 prose-th:text-left prose-th:text-sm prose-th:font-semibold prose-th:text-gray-700 prose-th:uppercase prose-th:tracking-wider prose-th:border-b prose-th:border-gray-200
+                      prose-td:px-6 prose-td:py-4 prose-td:text-sm prose-td:text-gray-900 prose-td:border-b prose-td:border-gray-200
+                      prose-hr:border-gray-300 prose-hr:my-8 prose-hr:border-t-2
+                      prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:p-4 prose-pre:my-6 prose-pre:overflow-x-auto
+                      prose-code:text-red-600 prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:border
+                      prose-img:rounded-lg prose-img:shadow-md prose-img:my-6">
           <ReactMarkdown 
             remarkPlugins={[remarkGfm]}
             components={{
@@ -181,41 +187,65 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
                     style={vscDarkPlus as any}
                     language={match[1]}
                     PreTag="div"
-                    className="rounded-lg my-4 shadow-sm"
+                    className="rounded-lg my-6 shadow-lg border border-gray-200"
+                    showLineNumbers={true}
+                    wrapLines={true}
+                    customStyle={{
+                      margin: '1.5rem 0',
+                      padding: '1rem',
+                      fontSize: '0.875rem',
+                      lineHeight: '1.5'
+                    }}
                     {...props}
                   >
                     {String(children).replace(/\n$/, '')}
                   </SyntaxHighlighter>
                 ) : (
-                  <code className="bg-gray-100 text-red-600 px-2 py-1 rounded text-sm font-mono border" {...props}>
+                  <code className="bg-red-50 text-red-700 px-2 py-1 rounded text-sm font-mono border border-red-200" {...props}>
                     {children}
                   </code>
                 );
               },
               p({children}) {
-                return <p className="text-gray-900 leading-relaxed mb-4">{children}</p>;
+                return <p className="text-gray-900 leading-relaxed mb-4 text-base">{children}</p>;
               },
               h1({children}) {
-                return <h1 className="text-2xl font-bold text-gray-900 mt-8 mb-4 pb-2 border-b border-gray-200">{children}</h1>;
+                return <h1 className="text-3xl font-bold text-gray-900 mt-8 mb-6 pb-3 border-b-2 border-gray-300">{children}</h1>;
               },
               h2({children}) {
-                return <h2 className="text-xl font-semibold text-gray-900 mt-6 mb-3">{children}</h2>;
+                return <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4 pb-2 border-b border-gray-200">{children}</h2>;
               },
               h3({children}) {
-                return <h3 className="text-lg font-medium text-gray-900 mt-5 mb-2">{children}</h3>;
+                return <h3 className="text-xl font-medium text-gray-900 mt-6 mb-3">{children}</h3>;
+              },
+              h4({children}) {
+                return <h4 className="text-lg font-medium text-gray-900 mt-5 mb-2">{children}</h4>;
+              },
+              h5({children}) {
+                return <h5 className="text-base font-medium text-gray-900 mt-4 mb-2">{children}</h5>;
+              },
+              h6({children}) {
+                return <h6 className="text-sm font-medium text-gray-600 mt-3 mb-2">{children}</h6>;
               },
               ul({children}) {
-                return <ul className="list-disc list-inside space-y-1 mb-4 text-gray-900">{children}</ul>;
+                return <ul className="space-y-2 mb-6 text-gray-900">{children}</ul>;
               },
-              ol({children}) {
-                return <ol className="list-decimal list-inside space-y-1 mb-4 text-gray-900">{children}</ol>;
+              ol({children, start}) {
+                return <ol className="space-y-2 mb-6 text-gray-900" start={start}>{children}</ol>;
               },
               li({children}) {
-                return <li className="ml-4 text-gray-900">{children}</li>;
+                return (
+                  <li className="relative pl-6 text-gray-900 leading-relaxed">
+                    <span className="absolute left-0 top-0 text-blue-500 font-medium">
+                      •
+                    </span>
+                    {children}
+                  </li>
+                );
               },
               blockquote({children}) {
                 return (
-                  <blockquote className="border-l-4 border-blue-500 pl-4 py-2 my-4 bg-blue-50 text-gray-800 italic">
+                  <blockquote className="border-l-4 border-blue-500 pl-6 py-3 my-6 bg-blue-50 text-gray-800 italic rounded-r-md">
                     {children}
                   </blockquote>
                 );
@@ -225,6 +255,44 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
               },
               em({children}) {
                 return <em className="italic text-gray-800">{children}</em>;
+              },
+              hr() {
+                return <hr className="border-gray-300 my-8 border-t-2" />;
+              },
+              img({src, alt}) {
+                return (
+                  <img 
+                    src={src} 
+                    alt={alt} 
+                    className="rounded-lg shadow-md my-6 max-w-full h-auto"
+                  />
+                );
+              },
+              table({children}) {
+                return (
+                  <div className="overflow-x-auto my-8">
+                    <table className="min-w-full divide-y divide-gray-200 border border-gray-300 rounded-lg shadow-sm">
+                      {children}
+                    </table>
+                  </div>
+                );
+              },
+              thead({children}) {
+                return <thead className="bg-gray-50">{children}</thead>;
+              },
+              th({children}) {
+                return (
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                    {children}
+                  </th>
+                );
+              },
+              td({children}) {
+                return (
+                  <td className="px-6 py-4 text-sm text-gray-900 border-b border-gray-200">
+                    {children}
+                  </td>
+                );
               }
             }}
           >
