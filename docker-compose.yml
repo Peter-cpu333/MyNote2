@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mynote-app:
+    build: .
+    container_name: mynote2.0
+    ports:
+      - "3000:3000"  # 前端端口
+      - "8008:8008"  # 后端API端口
+    volumes:
+      - ./backend/database:/app/backend/database  # 持久化数据库
+      - ./logs:/app/logs  # 持久化日志
+    environment:
+      - NODE_ENV=production
+      - PYTHONPATH=/app/backend
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000", "&&", "curl", "-f", "http://localhost:8008/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # 可选：添加反向代理 (Nginx)
+  nginx:
+    image: nginx:alpine
+    container_name: mynote-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro  # SSL证书目录
+    depends_on:
+      - mynote-app
+    restart: unless-stopped
+    profiles:
+      - with-nginx
+
+networks:
+  default:
+    name: mynote-network
