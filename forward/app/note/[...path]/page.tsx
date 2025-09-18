@@ -63,10 +63,10 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
         <div className="max-w-4xl mx-auto p-8">
           <Link
             href={getBackLink()}
-            className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 mb-6 transition-colors"
+            className="inline-flex items-center justify-center w-10 h-10 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full mb-6 transition-colors"
+            title="返回笔记列表"
           >
             <IoArrowBack />
-            <span>返回笔记列表</span>
           </Link>
           <div className="flex justify-center items-center h-64">
             <div className="text-lg text-gray-900">加载中...</div>
@@ -82,10 +82,10 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
         <div className="max-w-4xl mx-auto p-8">
           <Link
             href="/"
-            className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 mb-6 transition-colors"
+            className="inline-flex items-center justify-center w-10 h-10 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full mb-6 transition-colors"
+            title="返回笔记列表"
           >
             <IoArrowBack />
-            <span>返回笔记列表</span>
           </Link>
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
             <p>{error || '笔记不存在'}</p>
@@ -98,17 +98,20 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
   return (
     <main className="min-h-screen bg-gray-50" style={{ fontFamily: 'PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif' }}>
       <div className="max-w-4xl mx-auto p-8">
-        <Link
-          href={getBackLink()}
-          className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 mb-6 transition-colors"
-        >
-          <IoArrowBack />
-          <span>返回笔记列表</span>
-        </Link>
+        {/* 页面头部：返回按钮和标题 */}
+        <div className="flex items-start gap-4 mb-6">
+          <Link
+            href={getBackLink()}
+            className="inline-flex items-center justify-center w-12 h-12 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0 text-xl"
+            title="返回笔记列表"
+          >
+            <IoArrowBack />
+          </Link>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight flex-1 pr-4 break-words">{note.title}</h1>
+        </div>
         
         <article className="bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="p-8">
-            <h1 className="text-3xl font-bold mb-4 text-gray-900 leading-tight border-b border-gray-200 pb-4">{note.title}</h1>
             <div className="text-sm text-gray-600 mb-8 flex flex-wrap gap-4">
               <span className="inline-flex items-center">
                 <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">

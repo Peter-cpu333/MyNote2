@@ -90,8 +90,14 @@ export const folderApi = {
 // 笔记 API
 export const noteApi = {
   create: (data: CreateNoteData) => api.post<Note>('/api/notes/', data),
-  getAll: (folder_id?: number, skip: number = 0, limit: number = 100) =>
-    api.get<Note[]>('/api/notes/', { params: { folder_id, skip, limit } }),
+  getAll: (folder_id?: number, skip: number = 0, limit: number = 100) => {
+    // 如果指定了文件夹ID，使用专门的文件夹端点
+    if (folder_id) {
+      return api.get<Note[]>(`/api/notes/folder/${folder_id}`, { params: { skip, limit } });
+    }
+    // 否则获取所有笔记
+    return api.get<Note[]>('/api/notes/', { params: { skip, limit } });
+  },
   getOne: (id: number) => api.get<Note>(`/api/notes/${id}`),
   update: (id: number, data: UpdateNoteData) => api.put<Note>(`/api/notes/${id}`, data),
   delete: (id: number) => api.delete(`/api/notes/${id}`),

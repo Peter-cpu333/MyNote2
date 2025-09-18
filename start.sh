@@ -48,11 +48,11 @@ fi
 # 激活虚拟环境
 source .venv/bin/activate
 
-# 安装Python依赖
-if [ -f "requirements.txt" ]; then
-    echo "📦 安装Python依赖..."
-    pip install -r requirements.txt
-fi
+# # 安装Python依赖
+# if [ -f "requirements.txt" ]; then
+#     echo "📦 安装Python依赖..."
+#     pip install -r requirements.txt
+# fi
 
 # 启动后端服务（后台运行）
 echo "🚀 启动后端API服务 (端口 8008)..."
@@ -68,11 +68,11 @@ cd ..
 echo "🔧 启动前端服务..."
 cd forward
 
-# 安装Node.js依赖
-if [ ! -d "node_modules" ]; then
-    echo "📦 安装Node.js依赖..."
-    npm install
-fi
+# # 安装Node.js依赖
+# if [ ! -d "node_modules" ]; then
+#     echo "📦 安装Node.js依赖..."
+#     npm install
+# fi
 
 # 构建前端应用
 echo "🏗️  构建前端应用..."
@@ -80,7 +80,7 @@ npm run build
 
 # 启动前端服务（后台运行）
 echo "🚀 启动前端服务 (端口 3000)..."
-nohup npm start > ../logs/frontend.log 2>&1 &
+nohup npm run dev > ../logs/frontend.log 2>&1 &
 FRONTEND_PID=$!
 echo $FRONTEND_PID > ../logs/frontend.pid
 echo "✅ 前端服务已启动 (PID: $FRONTEND_PID)"

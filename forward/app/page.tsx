@@ -155,33 +155,43 @@ function HomeContent() {
   return (
     <main className="min-h-screen p-8 bg-gray-50">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-gray-800">我的笔记</h1>
-        
         {selectedFolder === null ? (
           // 显示文件夹列表
           <div>
-            <div className="mb-6 flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-gray-700">文件夹</h2>
+            {/* 文件夹标题和新建按钮 - 左上角布局 */}
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">文件夹</h2>
               <button 
                 onClick={() => setIsCreateModalOpen(true)}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+                className="w-10 h-10 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                title="新建文件夹"
               >
-                + 新建文件夹
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
               </button>
             </div>
             
             {folders.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-500 mb-4">还没有文件夹</p>
-                <button 
-                  onClick={() => setIsCreateModalOpen(true)}
-                  className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition-colors"
-                >
-                  创建第一个文件夹
-                </button>
+              <div className="text-center py-16">
+                <div className="bg-white rounded-2xl p-12 shadow-sm border max-w-md mx-auto">
+                  <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg className="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">开始你的笔记之旅</h3>
+                  <p className="text-gray-600 mb-6">创建第一个文件夹来整理你的想法和知识</p>
+                  <button 
+                    onClick={() => setIsCreateModalOpen(true)}
+                    className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                  >
+                    创建第一个文件夹
+                  </button>
+                </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {folders.map((folder) => (
                   <FolderCard
                     key={folder.id}
@@ -195,43 +205,59 @@ function HomeContent() {
         ) : (
           // 显示选中文件夹中的笔记列表
           <div>
-            <div className="mb-6 flex justify-between items-center">
+            {/* 返回按钮和文件夹标题 */}
+            <div className="flex items-center space-x-4 mb-6">
               <button
                 onClick={handleBackToFolders}
-                className="text-blue-600 hover:text-blue-800 flex items-center"
+                className="w-10 h-10 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full flex items-center justify-center transition-colors"
+                title="返回文件夹列表"
               >
-                ← 返回文件夹列表
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
+              <div className="h-6 w-px bg-gray-300"></div>
+              <h2 className="text-2xl font-bold text-gray-800 flex-1">
+                {folders.find(f => f.id === selectedFolder)?.name || '文件夹'}
+              </h2>
               <button 
                 onClick={handleCreateNote}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                className="w-10 h-10 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                title="新建笔记"
               >
-                + 新建笔记
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
               </button>
             </div>
             
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">
-              {folders.find(f => f.id === selectedFolder)?.name || '文件夹'} 中的笔记
-            </h2>
-            
             {notes.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-500 mb-4">这个文件夹还没有笔记</p>
-                <button 
-                  onClick={handleCreateNote}
-                  className="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600"
-                >
-                  创建第一个笔记
-                </button>
+              <div className="text-center py-16">
+                <div className="bg-white rounded-2xl p-12 shadow-sm border max-w-md mx-auto">
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-3">这里还很空呢</h3>
+                  <p className="text-gray-600 mb-6">在这个文件夹中创建你的第一篇笔记吧</p>
+                  <button 
+                    onClick={handleCreateNote}
+                    className="bg-gradient-to-r from-green-500 to-green-600 text-white px-8 py-3 rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                  >
+                    创建第一个笔记
+                  </button>
+                </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {notes.map((note) => (
                   <NoteCard
                     key={note.id}
                     title={note.title}
                     path={note.id.toString()}
                     lastModified={new Date(note.updated_at).toLocaleDateString('zh-CN')}
+                    preview={note.content ? note.content.split('\n')[0].substring(0, 100) : undefined}
                   />
                 ))}
               </div>
