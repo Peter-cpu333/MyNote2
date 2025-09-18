@@ -22,6 +22,8 @@ export interface Folder {
   id: number;
   name: string;
   description?: string;
+  color?: string;
+  is_default?: boolean;
   parent_id?: number | null;
   user_id: number;
   created_at: string;
