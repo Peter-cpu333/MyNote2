@@ -110,21 +110,25 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
 
   return (
     <main className="min-h-screen bg-gray-50" style={{ fontFamily: 'PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif' }}>
-      <div className="max-w-4xl mx-auto p-8">
-        {/* 第一行：返回按钮和标题 */}
-        <div className="flex items-center gap-4 mb-4">
-          <Link
-            href={getBackLink()}
-            className="inline-flex items-center justify-center w-12 h-12 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0 text-xl"
-            title="返回笔记列表"
-          >
-            <IoArrowBack />
-          </Link>
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight flex-1 break-words">
-            {note.title}
-          </h1>
+      {/* 固定头部：返回按钮和标题 */}
+      <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm">
+        <div className="max-w-4xl mx-auto px-8 py-4">
+          <div className="flex items-center gap-4">
+            <Link
+              href={getBackLink()}
+              className="inline-flex items-center justify-center w-12 h-12 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0 text-xl"
+              title="返回笔记列表"
+            >
+              <IoArrowBack />
+            </Link>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight flex-1 break-words">
+              {note.title}
+            </h1>
+          </div>
         </div>
-        
+      </div>
+      
+      <div className="max-w-4xl mx-auto p-8">
         {/* 第二行：文件夹信息和更新时间 */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">

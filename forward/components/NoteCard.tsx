@@ -13,7 +13,7 @@ const NoteCard: FC<NoteCardProps> = ({ title, path, lastModified, preview }) => 
   return (
     <Link href={`/note/${encodeURIComponent(path)}`}>
       <div className="p-4 border rounded-lg hover:shadow-lg transition-shadow bg-white cursor-pointer">
-        <div className="flex items-start space-x-3">
+        <div className="flex items-center space-x-3">
           <IoDocument className="text-blue-500 text-xl flex-shrink-0" />
           <h3 className="text-lg font-medium text-gray-800 flex-1 break-words">{title}</h3>
         </div>
