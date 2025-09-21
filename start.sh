@@ -80,7 +80,7 @@ npm run build
 
 # 启动前端服务（后台运行）
 echo "🚀 启动前端服务 (端口 3000)..."
-nohup npm run dev > ../logs/frontend.log 2>&1 &
+nohup npm start > ../logs/frontend.log 2>&1 &
 FRONTEND_PID=$!
 echo $FRONTEND_PID > ../logs/frontend.pid
 echo "✅ 前端服务已启动 (PID: $FRONTEND_PID)"
