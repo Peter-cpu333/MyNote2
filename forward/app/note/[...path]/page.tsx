@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Link from 'next/link';
+import Image from 'next/image';
 import { IoArrowBack } from 'react-icons/io5';
 import { noteApi, folderApi } from '@/services/api';
 import { Note, Folder } from '@/types';
@@ -264,11 +265,17 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
                 return <hr className="border-gray-300 my-8 border-t-2" />;
               },
               img({src, alt}) {
+                // 对于Markdown中的图片，使用普通img标签但添加unoptimized属性
+                // 因为Markdown中的图片路径可能是动态的，不适合Next.js Image组件
                 return (
-                  <img 
-                    src={src} 
-                    alt={alt} 
+                  <Image 
+                    src={src as string || ''} 
+                    alt={alt || ''} 
+                    width={800}
+                    height={600}
                     className="rounded-lg shadow-md my-6 max-w-full h-auto"
+                    style={{ width: 'auto', height: 'auto' }}
+                    unoptimized
                   />
                 );
               },
