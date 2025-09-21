@@ -1,12 +1,14 @@
+import select
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 import models 
-
 import models
 import schemas
 
+
 # 密码哈希工具
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 
 def hash_password(password: str):
     return pwd_context.hash(password)
