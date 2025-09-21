@@ -113,25 +113,25 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
     <main className="min-h-screen bg-gray-50" style={{ fontFamily: 'PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif' }}>
       {/* 固定头部：返回按钮和标题 */}
       <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm">
-        <div className="max-w-4xl mx-auto px-8 py-4">
-          <div className="flex items-center gap-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <Link
               href={getBackLink()}
-              className="inline-flex items-center justify-center w-12 h-12 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0 text-xl"
+              className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0 text-lg sm:text-xl"
               title="返回笔记列表"
             >
               <IoArrowBack />
             </Link>
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight flex-1 break-words">
+            <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 leading-tight flex-1 break-words">
               {note.title}
             </h1>
           </div>
         </div>
       </div>
       
-      <div className="max-w-4xl mx-auto p-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* 第二行：文件夹信息和更新时间 */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4 sm:mb-6 flex-wrap gap-2">
           <div className="flex items-center gap-2">
             {folder && (
               <>
@@ -149,7 +149,7 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
               </span>
             )}
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-xs sm:text-sm text-gray-500">
             {new Date(note.updated_at).toLocaleString('zh-CN')}
           </div>
         </div>

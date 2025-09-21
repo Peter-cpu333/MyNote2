@@ -10,11 +10,11 @@ const FolderCard: FC<FolderCardProps> = ({ name, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="p-4 border rounded-lg hover:shadow-lg transition-shadow bg-white cursor-pointer"
+      className="p-4 sm:p-6 border rounded-lg hover:shadow-lg transition-shadow bg-white cursor-pointer"
     >
       <div className="flex items-center space-x-3">
-        <IoFolder className="text-yellow-500 text-xl" />
-        <h3 className="text-lg font-medium text-gray-800">{name}</h3>
+        <IoFolder className="text-yellow-500 text-xl sm:text-2xl flex-shrink-0" />
+        <h3 className="text-base sm:text-lg font-medium text-gray-800 truncate">{name}</h3>
       </div>
     </div>
   );

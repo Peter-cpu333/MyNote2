@@ -65,22 +65,22 @@ function CreateNoteContent() {
 
   return (
     <main className="min-h-screen bg-gray-50" style={{ fontFamily: 'PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif' }}>
-      <div className="max-w-4xl mx-auto p-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         <div className="mb-6 flex items-center justify-between">
           <Link
             href={getBackLink()}
             className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-800 transition-colors"
           >
-            <IoArrowBack />
-            <span>返回</span>
+            <IoArrowBack className="text-lg sm:text-xl" />
+            <span className="text-sm sm:text-base">返回</span>
           </Link>
           
-          <h1 className="text-2xl font-bold text-gray-900">新建笔记</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">新建笔记</h1>
           
-          <div className="w-16"></div> {/* 占位符保持居中 */}
+          <div className="w-12 sm:w-16"></div> {/* 占位符保持居中 */}
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
+        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-4 sm:p-6">
           {error && (
             <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
               {error}

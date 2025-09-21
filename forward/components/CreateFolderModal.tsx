@@ -84,8 +84,8 @@ export default function CreateFolderModal({
     <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 w-full max-w-sm mx-auto transform transition-all duration-300 ease-out">
         {/* 头部 */}
-        <div className="flex items-center justify-between p-6 pb-4">
-          <h2 className="text-xl font-semibold text-gray-800">新建文件夹</h2>
+        <div className="flex items-center justify-between p-4 sm:p-6 pb-3 sm:pb-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800">新建文件夹</h2>
           <button
             onClick={handleClose}
             disabled={loading}
@@ -98,10 +98,10 @@ export default function CreateFolderModal({
         </div>
 
         {/* 表单内容 */}
-        <form onSubmit={handleSubmit} className="px-6 pb-6">
+        <form onSubmit={handleSubmit} className="px-4 sm:px-6 pb-4 sm:pb-6">
           {/* 文件夹名称 */}
-          <div className="mb-6">
-            <label htmlFor="folderName" className="block text-sm font-medium text-gray-700 mb-3">
+          <div className="mb-4 sm:mb-6">
+            <label htmlFor="folderName" className="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">
               文件夹名称
             </label>
             <input
@@ -111,7 +111,7 @@ export default function CreateFolderModal({
               onChange={(e) => handleInputChange('name', e.target.value)}
               placeholder="输入文件夹名称"
               disabled={loading}
-              className={`w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 disabled:bg-gray-100/50 disabled:cursor-not-allowed transition-all duration-200 text-gray-900 
+              className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-white/70 backdrop-blur-sm border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 disabled:bg-gray-100/50 disabled:cursor-not-allowed transition-all duration-200 text-gray-900 text-sm sm:text-base
               }`}
               maxLength={100}
               autoFocus
@@ -122,19 +122,19 @@ export default function CreateFolderModal({
           </div>
 
           {/* 按钮组 */}
-          <div className="flex justify-end space-x-3">
+          <div className="flex justify-end space-x-2 sm:space-x-3">
             <button
               type="button"
               onClick={handleClose}
               disabled={loading}
-              className="px-5 py-2.5 text-gray-600 bg-gray-100/70 backdrop-blur-sm rounded-xl hover:bg-gray-200/70 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 text-gray-600 bg-gray-100/70 backdrop-blur-sm rounded-xl hover:bg-gray-200/70 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm sm:text-base"
             >
               取消
             </button>
             <button
               type="submit"
               disabled={loading || !formData.name.trim()}
-              className="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center font-medium shadow-lg shadow-blue-500/25"
+              className="px-4 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center font-medium shadow-lg shadow-blue-500/25 text-sm sm:text-base"
             >
               {loading && (
                 <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
