@@ -56,7 +56,7 @@ fi
 
 # 启动后端服务（后台运行）
 echo "🚀 启动后端API服务 (端口 8008)..."
-nohup uvicorn main:app --host 0.0.0.0 --port 8008 > ../logs/backend.log 2>&1 &
+nohup uvicorn main:app --host 0.0.0.0 --port 8008 > /dev/null 2>&1 &
 BACKEND_PID=$!
 echo $BACKEND_PID > ../logs/backend.pid
 echo "✅ 后端服务已启动 (PID: $BACKEND_PID)"
@@ -80,7 +80,7 @@ npm run build
 
 # 启动前端服务（后台运行）
 echo "🚀 启动前端服务 (端口 3000)..."
-nohup npm start > ../logs/frontend.log 2>&1 &
+nohup npm start > /dev/null 2>&1 &
 FRONTEND_PID=$!
 echo $FRONTEND_PID > ../logs/frontend.pid
 echo "✅ 前端服务已启动 (PID: $FRONTEND_PID)"
@@ -94,10 +94,6 @@ echo "📱 前端访问地址: http://localhost:3000"
 echo "🔧 后端API地址: http://localhost:8008"
 echo "📋 API文档地址: http://localhost:8008/docs"
 echo ""
-echo "📝 日志文件:"
-echo "   - 后端日志: logs/backend.log"
-echo "   - 前端日志: logs/frontend.log"
-echo ""
 echo "🛑 停止服务请运行: ./stop.sh"
 echo ""
 
@@ -109,13 +105,13 @@ echo "🔍 检查服务状态..."
 if kill -0 $BACKEND_PID 2>/dev/null; then
     echo "✅ 后端服务运行正常"
 else
-    echo "❌ 后端服务启动失败，请检查日志: logs/backend.log"
+    echo "❌ 后端服务启动失败"
 fi
 
 if kill -0 $FRONTEND_PID 2>/dev/null; then
     echo "✅ 前端服务运行正常"
 else
-    echo "❌ 前端服务启动失败，请检查日志: logs/frontend.log"
+    echo "❌ 前端服务启动失败"
 fi
 
 echo ""
