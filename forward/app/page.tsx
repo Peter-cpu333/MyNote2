@@ -157,18 +157,16 @@ function HomeContent() {
       {selectedFolder === null ? (
         // 文件夹列表页面的固定头部
         <>
-          <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-800">我的笔记</h2>
+          <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm navbar-height">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 navbar-padding flex items-center">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="navbar-title font-bold text-gray-800">我的笔记</h2>
                 <button 
                   onClick={() => setIsCreateModalOpen(true)}
-                  className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                  className="text-blue-600 hover:text-blue-800 transition-colors"
                   title="新建文件夹"
                 >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
+                  <span className="navbar-icon font-bold">+</span>
                 </button>
               </div>
             </div>
@@ -212,30 +210,28 @@ function HomeContent() {
       ) : (
         // 笔记列表页面的固定头部
         <>
-          <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-              <div className="flex items-center space-x-2 sm:space-x-4">
+          <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm navbar-height">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 navbar-padding flex items-center">
+              <div className="flex items-center space-x-2 sm:space-x-4 w-full">
                 <button
                   onClick={handleBackToFolders}
-                  className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full flex items-center justify-center transition-colors"
+                  className="navbar-button text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full flex items-center justify-center transition-colors"
                   title="返回文件夹列表"
                 >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="navbar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
                 <div className="h-4 sm:h-6 w-px bg-gray-300"></div>
-                <h2 className="text-lg sm:text-2xl font-bold text-gray-800 flex-1 truncate">
+                <h2 className="navbar-title font-bold text-gray-800 flex-1 truncate">
                   {folders.find(f => f.id === selectedFolder)?.name || '文件夹'}
                 </h2>
                 <button 
                   onClick={handleCreateNote}
-                  className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                  className="text-green-600 hover:text-green-800 transition-colors"
                   title="新建笔记"
                 >
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
+                  <span className="navbar-icon font-bold">+</span>
                 </button>
               </div>
             </div>

@@ -112,50 +112,51 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
   return (
     <main className="min-h-screen bg-gray-50" style={{ fontFamily: 'PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif' }}>
       {/* 固定头部：返回按钮和标题 */}
-      <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
-          <div className="flex items-center gap-3 sm:gap-4">
-            <Link
-              href={getBackLink()}
-              className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0 text-lg sm:text-xl"
-              title="返回笔记列表"
-            >
-              <IoArrowBack />
-            </Link>
-            <h1 className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 leading-tight flex-1 break-words">
-              {note.title}
-            </h1>
-          </div>
+      <div className="sticky top-0 z-10 bg-gray-50 border-b border-gray-200 shadow-sm navbar-height">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 navbar-padding flex items-center">
+        <div className="flex items-center gap-3 sm:gap-4 w-full max-w-4xl mx-auto">
+          <Link
+            href={getBackLink()}
+            className="navbar-button text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-full transition-colors flex-shrink-0 flex items-center justify-center"
+            title="返回笔记列表"
+          >
+            <IoArrowBack className="navbar-icon" />
+          </Link>
+          <h1 className="navbar-title font-bold text-gray-900 leading-tight flex-1 break-words">
+            {note.title}
+          </h1>
         </div>
       </div>
+      </div>
       
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
-        {/* 第二行：文件夹信息和更新时间 */}
-        <div className="flex items-center justify-between mb-4 sm:mb-6 flex-wrap gap-2">
-          <div className="flex items-center gap-2">
-            {folder && (
-              <>
-                <span 
-                  className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium text-white"
-                  style={{ backgroundColor: folder.color || '#6B73FF' }}
-                >
-                  {folder.name}
-                </span>
-              </>
-            )}
-            {!folder && note.folder_id && (
-              <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-500 text-white">
-                文件夹
-              </span>
-            )}
-          </div>
-          <div className="text-xs sm:text-sm text-gray-500">
-            {new Date(note.updated_at).toLocaleString('zh-CN')}
-          </div>
-        </div>
-        
-        {/* 笔记内容区域 - 移除卡片样式 */}
-        <div className="prose prose-lg prose-slate max-w-none text-gray-900
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+          <div className="max-w-4xl mx-auto">
+            {/* 第二行：文件夹信息和更新时间 */}
+            <div className="flex items-center justify-between mb-4 sm:mb-6 flex-wrap gap-2">
+              <div className="flex items-center gap-2">
+                {folder && (
+                  <>
+                    <span 
+                      className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium text-white"
+                      style={{ backgroundColor: folder.color || '#6B73FF' }}
+                    >
+                      {folder.name}
+                    </span>
+                  </>
+                )}
+                {!folder && note.folder_id && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-500 text-white">
+                    文件夹
+                  </span>
+                )}
+              </div>
+              <div className="text-xs sm:text-sm text-gray-500">
+                {new Date(note.updated_at).toLocaleString('zh-CN')}
+              </div>
+            </div>
+            
+            {/* 笔记内容区域 - 移除卡片样式 */}
+            <div className="prose prose-lg prose-slate max-w-none text-gray-900
                       prose-headings:text-gray-900 prose-headings:font-semibold
                       prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-6 prose-h1:pb-3 prose-h1:border-b-2 prose-h1:border-gray-300
                       prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-gray-200
@@ -309,6 +310,7 @@ export default function NotePage({ params }: { params: Promise<{ path: string[] 
           >
             {note.content || '这个笔记还没有内容'}
           </ReactMarkdown>
+          </div>
         </div>
       </div>
     </main>
