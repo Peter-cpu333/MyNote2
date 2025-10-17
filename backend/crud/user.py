@@ -1,8 +1,6 @@
-import select
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 import models 
-import models
 import schemas
 
 

@@ -46,6 +46,7 @@ def get_folders_by_owner(db: Session, owner_id: int) -> List[models.Folder]:
     返回:
     - Folder 对象列表
     """
+    
     return db.query(models.Folder).filter(models.Folder.owner_id == owner_id).all()
 
 # --- 更新 (Update) ---
