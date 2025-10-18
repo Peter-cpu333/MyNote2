@@ -83,3 +83,6 @@ start.sh
 *.db-journal
 *.db-wal
 *.db-shm
+
+#start
+start
