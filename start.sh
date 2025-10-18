@@ -44,7 +44,7 @@ FRONTEND_PID=$!
 echo $FRONTEND_PID > ../logs/frontend.pid
 echo "✅ 前端服务已启动 (PID: $FRONTEND_PID)"
 
-# 返回项目根目录
+# 返回项目根目录1234324
 cd ..
 
 echo ""

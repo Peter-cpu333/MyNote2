@@ -73,4 +73,13 @@ Thumbs.db
 logs/
 
 # sh
+start.sh
 ./start.sh
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
