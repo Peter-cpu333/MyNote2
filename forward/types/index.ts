@@ -44,6 +44,13 @@ export interface UpdateFolderData {
   parent_id?: number;
 }
 
+export interface DeleteFolderData {
+  id: number;
+  name?: string;
+
+}
+
+
 export interface Note {
   id: number;
   title: string;

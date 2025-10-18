@@ -38,7 +38,7 @@ cd forward
 
 echo "🚀 启动前端开发服务器 (端口 3000)..."
 
-nohup npm run > ../logs/frontend.log 2>&1 &
+nohup npm run dev > ../logs/frontend.log 2>&1 &
 
 FRONTEND_PID=$!
 echo $FRONTEND_PID > ../logs/frontend.pid

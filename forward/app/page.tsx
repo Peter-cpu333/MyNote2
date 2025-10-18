@@ -1,11 +1,12 @@
 'use client';
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import FolderCard from '../components/FolderCard';
-import NoteCard from '../components/NoteCard';
-import CreateFolderModal from '../components/CreateFolderModal';
+import CreateFolderModal from '@/components/CreateFolderModal';
+import DeleteFolderModal from '@/components/DeleteFolderModal';
+import FolderCard from '@/components/FolderCard';
+import NoteCard from '@/components/NoteCard';
 import { folderApi, noteApi } from '../services/api';
-import { Folder, Note, CreateFolderData } from '../types';
+import { Folder, Note, CreateFolderData, DeleteFolderData } from '../types';
 
 function HomeContent() {
   const router = useRouter();
@@ -17,6 +18,28 @@ function HomeContent() {
   const [error, setError] = useState<string | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [createLoading, setCreateLoading] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [folderToDelete, setFolderToDelete] = useState<DeleteFolderData | null>(null);
+  
+  // 打开删除弹窗
+  const handelDeleteFolderClick = (folder: DeleteFolderData) => {
+    setFolderToDelete(folder);
+    setDeleteModalOpen(true);
+  };
+  //弹窗确认
+  const handleConfirmDelete = async (folder: DeleteFolderData) => {
+    try {
+      await folderApi.delete(folder.id);
+      setFolders(prev => prev.filter(f => f.id !== folder.id));
+      setDeleteModalOpen(false);
+      setFolderToDelete(null);
+    } catch (err) {
+      console.error('删除失败', err);
+      alert('删除失败，请重试');
+      
+    }
+
+  }
 
   // 获取文件夹列表
   const fetchFolders = async () => {
@@ -119,6 +142,8 @@ function HomeContent() {
     }
   };
 
+
+
   if (loading) {
     return (
       <main className="min-h-screen p-8 bg-gray-50">
@@ -200,6 +225,7 @@ function HomeContent() {
                     key={folder.id}
                     name={folder.name}
                     onClick={() => handleFolderClick(folder.id)}
+                    onDelete={() => handelDeleteFolderClick({ id: folder.id, name: folder.name })}
                   />
                 ))}
               </div>
@@ -282,6 +308,17 @@ function HomeContent() {
         onClose={() => setIsCreateModalOpen(false)}
         onSubmit={handleCreateFolder}
         loading={createLoading}
+      />
+
+      {/* 删除文件夹弹窗 */}
+      <DeleteFolderModal
+        isOpen={deleteModalOpen}
+        folder={folderToDelete}
+        onClose={() => {
+          setDeleteModalOpen(false);
+          setFolderToDelete(null);
+        }}
+        onConfirm={handleConfirmDelete}
       />
     </main>
   );
